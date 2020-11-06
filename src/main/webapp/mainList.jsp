@@ -1,7 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="week8.Book" %>
-<%@ page import="week8.User" %><%--
+<%@ page import="week8.User" %>
+<%@ page import="week8.Borrower" %><%--
   Created by IntelliJ IDEA.
   User: tomirissayat
   Date: 06.11.2020
@@ -9,12 +10,36 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Book book = (Book)request.getAttribute("book");
+    User currentUser = (User) session.getAttribute("user");
+    List<Borrower> borrows = (List<Borrower>)request.getAttribute("borrows");
+%>
+
 <html>
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Baloo+Bhai+2|Gotu|Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,300,700" rel="stylesheet">
     <title>List</title>
+    <script>
+        $( document ).ready(function () {
+
+            $('#borrowButton').click(function () {
+                $.ajax({
+                    url: 'book',
+                    type: "POST",
+                    data: {
+                        action: "borrow",
+                        book: '<%=book%>'
+                    }, accepts: "application/x-www-form-urlencoded; charset=UTF-8",
+                    success: function (data) {
+                        location.reload()
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
 <style>
@@ -160,6 +185,7 @@
                         <th>Name Of the Book</th>
                         <th>Author</th>
                         <th>Number of remaining books</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                 </table>
@@ -169,14 +195,26 @@
                     <tbody>
                     <%
                         List<Book> books = (ArrayList<Book>)request.getAttribute("books");
-                        for (Book book: books) {
-                            if (book.getCount() == 0 ) continue;
+                        for (Book bookis: books) {
+                            if (bookis.getCount() == 0 ) continue;
                     %>
                     <tr>
-                        <td><%=book.getId()%></td>
-                        <td><a href="<%=book.getName()%>"><%=book.getName()%></a></td>
-                        <td><%=book.getAuthor()%></td>
-                        <td><%=book.getCount()%></td>
+                        <td><%=bookis.getId()%></td>
+                        <td><a href="<%=bookis.getName()%>"><%=bookis.getName()%></a></td>
+                        <td><%=bookis.getAuthor()%></td>
+                        <td><%=bookis.getCount()%></td>
+                        <td>
+                            <form action=BorrowServlet>
+                                <button type="button" id="borrowButton" style="background-color: darkred; color: white; border: 1px solid transparent;
+    border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px">Borrow</button>
+                            </form><%
+                            if (currentUser.getAccess() == 1) {
+                        %>
+                            <form action=BorrowServlet>
+                            <button type="button" id="delete" style="background-color: darkred; color: white; border: 1px solid transparent;
+    border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px">Delete</button>
+                        </form><% } %>
+                        </td>
                     </tr>
                     <%
                     }
