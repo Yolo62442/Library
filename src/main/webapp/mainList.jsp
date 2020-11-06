@@ -80,10 +80,9 @@
     <h1>Book List:</h1>
     <ol class="list-group">
         <%
-            User user = (User) request.getSession().getAttribute("user");
             List<Book> books = (ArrayList<Book>)request.getAttribute("books");
             for (Book book: books) {
-                if (book.getCount() <= 0 && user.getAccess() < 2) continue;
+                if (book.getCount() == 0 ) continue;
         %>
         <li class="list-group-item d-flex justify-content-between align-items-center"> <a href="book?isbn=<%=book.getId()%>"> <%= book.getName() %></a> <span class="badge badge-primary badge-pill"><%=book.getCount()%></span></li><hr>
         <%

@@ -6,6 +6,12 @@ public class Book {
     private String author;
     private int count;
 
+    public Book(String name, String author, int count) {
+        this.name = name;
+        this.author = author;
+        this.count = count;
+    }
+
     public Book(int id, String name, String author, int count) {
         this.id = id;
         this.name = name;

@@ -5,14 +5,23 @@ public class User {
     private String name;
     private String surname;
     private String email;
+    private String password;
     private int access;
 
-    public User(int id, String name, String surname, String email, int access) {
+    public User(int id, String name, String surname, String email, String password, int access) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.password = password;
         this.access = access;
+    }
+
+    public User(String name, String surname, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
     }
 
     public int getId() {
@@ -53,5 +62,13 @@ public class User {
 
     public void setAccess(int access) {
         this.access = access;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
