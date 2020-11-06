@@ -20,7 +20,7 @@
                     <h4 class="card-title mt-2">Log in</h4>
                 </header>
                 <article class="card-body">
-                    <form method="GET" action="LoginUser">
+                    <form method="GET" action="LoginServlet">
                         <div class="form-group">
                             <label>Email address</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">

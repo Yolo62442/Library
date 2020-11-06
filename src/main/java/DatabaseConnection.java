@@ -105,4 +105,20 @@ public class DatabaseConnection {
         }
         return list;
     }
+    public User login(String e, String p){
+        User user;
+        try {
+            String query = "SELECT * FROM users WHERE email = ?";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString (1, e);
+            ResultSet rs = preparedStmt.executeQuery();
+            if (rs.next()) {
+                user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
+                if (user.getPassword().equals(p)) return user;
+            }
+        } catch(Exception cnf) {
+            System.out.println(cnf.getMessage());
+        }
+        return null;
+    }
 }
