@@ -26,11 +26,25 @@
         <h3 style="background-color: rgba(255, 61, 61, 0.568); height: 50px; text-align: center; padding: 5px"><b>Add New Book</b></h3>
         <div class="form-group">
             <input type="hidden" value="add" name="action" style="background-color: rgba(14, 56, 156, 0.329); border: 0px; color: white;">
-            <label style="background-color: rgba(14, 56, 156, 0.329); border: 0px; color: white;" for="exampleInputEmail2">Name: <input type="text" name="name" class="form-control" id="exampleInputEmail2"></label><br>
-            <label style="background-color: rgba(14, 56, 156, 0.329); border: 0px; color: white;" for="exampleFormControlTextarea1">Author: <textarea name="author" class="form-control" id="exampleFormControlTextarea1"></textarea></label><br>
+
+
             <label style="background-color: rgba(14, 56, 156, 0.329); border: 0px; color: white;">Count:<br> <input type="number" name="count" class="form-group"></label><br>
         </div>
-        <input type="submit" class="btn btn-primary" value="Save">
+        <div class="form-group">
+            <label for="exampleInputEmail2">Name</label>
+            <input type="text" name="name" class="form-control" id="exampleInputEmail2">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Author</label>
+            <input type="text" name="author" class="form-control" id="exampleFormControlTextarea1">
+        </div>
+        <div class="form-group">
+            <label>Count</label>
+            <input type="number" name="count" class="form-control">
+        </div>
+        <button style="width: 100%; height: 42px; text-align: center; font-size: 1.1em;
+                background-color: rgba(255, 61, 61, 0.668); color: white" type="submit" class="btn btn-primary1" id="register">Save</button>
+
     </form>
     </div>
 </div>
