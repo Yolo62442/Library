@@ -77,4 +77,18 @@ public class DatabaseConnection {
         closeCon();
         return true;
     }
+    /*public void addBook(String n, String a, int c){
+        try {
+            String query = "INSERT INTO users(name, surname, email, password) VALUES(?, ?, ?, ?)";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString (1, n);
+            preparedStmt.setString (2, s);
+            preparedStmt.setString   (3, e);
+            preparedStmt.setString(4, p);
+            preparedStmt.execute();
+            con.close();
+        } catch(Exception cnf) {
+            System.out.println(cnf.getMessage());
+        }
+    }*/
 }

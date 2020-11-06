@@ -1063,235 +1063,291 @@
       <ObjectGrants>ALL PRIVILEGES!
 </ObjectGrants>
     </user>
-    <table id="338" parent="10" name="feedback"/>
-    <table id="339" parent="10" name="ingridients"/>
-    <table id="340" parent="10" name="recipe"/>
-    <table id="341" parent="10" name="users"/>
-    <table id="342" parent="10" name="wish"/>
-    <column id="343" parent="338" name="id">
+    <table id="338" parent="10" name="books"/>
+    <table id="339" parent="10" name="borrower"/>
+    <table id="340" parent="10" name="feedback"/>
+    <table id="341" parent="10" name="ingridients"/>
+    <table id="342" parent="10" name="recipe"/>
+    <table id="343" parent="10" name="users"/>
+    <table id="344" parent="10" name="wish"/>
+    <column id="345" parent="338" name="book_id">
+      <Position>1</Position>
+      <DataType>int(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="346" parent="338" name="book_name">
+      <Position>2</Position>
+      <DataType>varchar(25)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="347" parent="338" name="book_author">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="348" parent="338" name="count">
+      <Position>4</Position>
+      <DataType>int(4)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="349" parent="338" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>book_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="350" parent="339" name="id">
+      <Position>1</Position>
+      <DataType>int(6)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="351" parent="339" name="student_id">
+      <Position>2</Position>
+      <DataType>int(6)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="352" parent="339" name="book_id">
+      <Position>3</Position>
+      <DataType>int(6)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="353" parent="339" name="student_id">
+      <ColNames>student_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="354" parent="339" name="book_id">
+      <ColNames>book_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="355" parent="339" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="356" parent="339" name="borrower_ibfk_2">
+      <ColNames>student_id</ColNames>
+      <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="357" parent="339" name="borrower_ibfk_1">
+      <ColNames>book_id</ColNames>
+      <RefTableName>books</RefTableName>
+      <RefColNames>book_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="358" parent="340" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="344" parent="338" name="email">
+    <column id="359" parent="340" name="email">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="345" parent="338" name="content">
+    <column id="360" parent="340" name="content">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="346" parent="338" name="PRIMARY">
+    <key id="361" parent="340" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="347" parent="339" name="id">
+    <column id="362" parent="341" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="348" parent="339" name="ingrid_name">
+    <column id="363" parent="341" name="ingrid_name">
       <Position>2</Position>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="349" parent="339" name="quantity">
+    <column id="364" parent="341" name="quantity">
       <Position>3</Position>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="350" parent="339" name="recipe_id">
+    <column id="365" parent="341" name="recipe_id">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="351" parent="339" name="recipe_id">
+    <index id="366" parent="341" name="recipe_id">
       <ColNames>recipe_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="352" parent="339" name="PRIMARY">
+    <key id="367" parent="341" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="353" parent="339" name="ingridients_ibfk_1">
+    <foreign-key id="368" parent="341" name="ingridients_ibfk_1">
       <ColNames>recipe_id</ColNames>
       <RefTableName>recipe</RefTableName>
       <RefColNames>id</RefColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="354" parent="340" name="id">
+    <column id="369" parent="342" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="355" parent="340" name="title">
+    <column id="370" parent="342" name="title">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="356" parent="340" name="step1">
+    <column id="371" parent="342" name="step1">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="357" parent="340" name="step2">
+    <column id="372" parent="342" name="step2">
       <Position>4</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="358" parent="340" name="step3">
+    <column id="373" parent="342" name="step3">
       <Position>5</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="359" parent="340" name="type">
+    <column id="374" parent="342" name="type">
       <Position>6</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="360" parent="340" name="user_id">
+    <column id="375" parent="342" name="user_id">
       <Position>7</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="361" parent="340" name="show_id">
+    <column id="376" parent="342" name="show_id">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>1</DefaultExpression>
     </column>
-    <column id="362" parent="340" name="rating">
+    <column id="377" parent="342" name="rating">
       <Position>9</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>5</DefaultExpression>
     </column>
-    <column id="363" parent="340" name="count">
+    <column id="378" parent="342" name="count">
       <Position>10</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>1</DefaultExpression>
     </column>
-    <index id="364" parent="340" name="recipe_ibfk_1">
+    <index id="379" parent="342" name="recipe_ibfk_1">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="365" parent="340" name="PRIMARY">
+    <key id="380" parent="342" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="366" parent="340" name="recipe_ibfk_1">
+    <foreign-key id="381" parent="342" name="recipe_ibfk_1">
       <ColNames>user_id</ColNames>
       <RefTableName>users</RefTableName>
       <RefColNames>id</RefColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="367" parent="341" name="id">
+    <column id="382" parent="343" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="368" parent="341" name="password">
+    <column id="383" parent="343" name="password">
       <Position>2</Position>
       <DataType>varchar(15)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="369" parent="341" name="name">
+    <column id="384" parent="343" name="name">
       <Position>3</Position>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="370" parent="341" name="gender">
+    <column id="385" parent="343" name="email">
       <Position>4</Position>
-      <DataType>varchar(6)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="371" parent="341" name="email">
-      <Position>5</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="372" parent="341" name="contact">
+    <column id="386" parent="343" name="surname">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="387" parent="343" name="access">
       <Position>6</Position>
-      <DataType>varchar(25)|0s</DataType>
-    </column>
-    <column id="373" parent="341" name="surname">
-      <Position>7</Position>
-      <DataType>text|0s</DataType>
+      <DataType>int(1)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="374" parent="341" name="url">
-      <Position>8</Position>
-      <DataType>text|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="375" parent="341" name="birthday">
-      <Position>9</Position>
-      <DataType>date|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="376" parent="341" name="email">
+    <index id="388" parent="343" name="email">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="377" parent="341" name="PRIMARY">
+    <key id="389" parent="343" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="378" parent="341" name="email">
+    <key id="390" parent="343" name="email">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>email</UnderlyingIndexName>
     </key>
-    <column id="379" parent="342" name="id">
+    <column id="391" parent="344" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="380" parent="342" name="user_id">
+    <column id="392" parent="344" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="381" parent="342" name="recipe_id">
+    <column id="393" parent="344" name="recipe_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="382" parent="342" name="user_id">
+    <index id="394" parent="344" name="user_id">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="383" parent="342" name="recipe_id">
+    <index id="395" parent="344" name="recipe_id">
       <ColNames>recipe_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="384" parent="342" name="PRIMARY">
+    <key id="396" parent="344" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="385" parent="342" name="wish_ibfk_2">
+    <foreign-key id="397" parent="344" name="wish_ibfk_2">
       <ColNames>user_id</ColNames>
       <RefTableName>users</RefTableName>
       <RefColNames>id</RefColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="386" parent="342" name="wish_ibfk_1">
+    <foreign-key id="398" parent="344" name="wish_ibfk_1">
       <ColNames>recipe_id</ColNames>
       <RefTableName>recipe</RefTableName>
       <RefColNames>id</RefColNames>
