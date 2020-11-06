@@ -1,5 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="week8.Book" %>
+<%@ page import="week8.User" %><%--
   Created by IntelliJ IDEA.
   User: tomirissayat
   Date: 06.11.2020
@@ -78,7 +80,7 @@
     <h1>Book List:</h1>
     <ol class="list-group">
         <%
-            User user = (User)request.getSession().getAttribute("user");
+            User user = (User) request.getSession().getAttribute("user");
             List<Book> books = (ArrayList<Book>)request.getAttribute("books");
             for (Book book: books) {
                 if (book.getCount() <= 0 && user.getAccess() < 2) continue;

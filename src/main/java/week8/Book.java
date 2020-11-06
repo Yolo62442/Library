@@ -1,3 +1,5 @@
+package week8;
+
 public class Book {
     private int id;
     private String name;
@@ -43,3 +45,4 @@ public class Book {
         this.author = author;
     }
 }
+
