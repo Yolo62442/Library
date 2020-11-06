@@ -11,10 +11,83 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Baloo+Bhai+2|Gotu|Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,300,700" rel="stylesheet">
     <title>List</title>
 </head>
 <body>
 <style>
+    h1{
+        font-size: 30px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    table{
+        width:100%;
+        table-layout: fixed;
+    }
+    .tbl-header{
+        background-color: rgba(255,255,255,0.3);
+    }
+    .tbl-content{
+        height:300px;
+        overflow-x:auto;
+        margin-top: 0px;
+        border: 1px solid rgba(255,255,255,0.3);
+    }
+    th{
+        padding: 20px 15px;
+        text-align: left;
+        font-weight: 500;
+        font-size: 25px;
+        color: #fff;
+        text-transform: uppercase;
+    }
+    td{
+        padding: 35px;
+        text-align: left;
+        vertical-align:middle;
+        font-weight: 300;
+        font-size: 20px;
+        color: #fff;
+        border-bottom: solid 1px rgba(255,255,255,0.1);
+    }
+
+
+    /* demo styles */
+
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+    body{
+        background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+        background: linear-gradient(to right, #25c481, #25b7c4);
+        font-family: 'Roboto', sans-serif;
+    }
+    section{
+        margin: 50px;
+    }
+
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+    ::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+    .overlay h1 {
+        text-align:center;
+        color:#fff;
+        font-size: 70px;
+        margin-top:17%;
+    }
+
     body {
         background-image: url("https://ru.freepik.com/free-vector/watercolor-autumn-leaves-background_5335075.htm");
         background-repeat: no-repeat;
@@ -76,19 +149,44 @@
         opacity:0.6
     }#btn-twtr:hover{color:#fff;opacity:1}
 </style>
-<div class="book">
-    <h1>Book List:</h1>
-    <ol class="list-group">
-        <%
-            List<Book> books = (ArrayList<Book>)request.getAttribute("books");
-            for (Book book: books) {
-                if (book.getCount() == 0 ) continue;
-        %>
-        <li class="list-group-item d-flex justify-content-between align-items-center"> <a href="book?isbn=<%=book.getId()%>"> <%= book.getName() %></a> <span class="badge badge-primary badge-pill"><%=book.getCount()%></span></li><hr>
-        <%
-            }
-        %>
-    </ol>
+<div class="list-group">
+    <%
+        List<Book> books = (ArrayList<Book>)request.getAttribute("books");
+        for (Book book: books) {
+            if (book.getCount() == 0 ) continue;
+    %>
+    <section>
+
+        <div class="tbl-header" style="margin-top: 40px">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name Of the Book</th>
+                    <th>Author</th>
+                    <th>Number of remaining books</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                <?php foreach ($rows as $row):
+                  ?>
+                <tr>
+                    <td><%=book.getId()%>"> </td>
+                    <td><a href="book?isbn=<%=book.getName()%>"></a></td>
+                    <td><%=book.getCount()%></td>
+                </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+            <%
+                }
+            %>
+        </div>
+    </section>
 </div>
 </body>
 </html>
