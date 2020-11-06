@@ -13,45 +13,40 @@
 <%
     Book book = (Book)request.getAttribute("book");
     User currentUser = (User) session.getAttribute("user");
-    List<Borrower> borrows = (List<Borrower>)request.getAttribute("borrows");
 %>
 
 <html>
 <head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Baloo+Bhai+2|Gotu|Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,300,700" rel="stylesheet">
     <title>List</title>
     <script>
-        $( document ).ready(function () {
-            $('#deleteButton').click(function () {
+            function borrow(id) {
                 $.ajax({
-                    url: 'book',
+                    url: "BorrowServlet",
                     type: "POST",
                     data: {
-                        action: "delete",
-                        book: '<%=book%>'
+                        id: id
                     }, accepts: "application/x-www-form-urlencoded; charset=UTF-8",
                     success: function (data) {
                         location.reload()
                     }
                 });
-            });
-
-            $('#borrowButton').click(function () {
+            };
+            function deleteBook(id) {
                 $.ajax({
-                    url: 'book',
+                    url: "DeleteBookServlet",
                     type: "POST",
                     data: {
-                        action: "borrow",
-                        book: '<%=book%>'
+                        id: id
                     }, accepts: "application/x-www-form-urlencoded; charset=UTF-8",
                     success: function (data) {
                         location.reload()
                     }
                 });
-            });
-        });
+            };
     </script>
 </head>
 <body>
@@ -213,17 +208,17 @@
                     %>
                     <tr>
                         <td><%=bookis.getId()%></td>
-                        <td><a href="<%=bookis.getName()%>"><%=bookis.getName()%></a></td>
+                        <td><%=bookis.getName()%></td>
                         <td><%=bookis.getAuthor()%></td>
                         <td><%=bookis.getCount()%></td>
                         <td>
                             <button type="button" id="borrowButton" style="background-color: darkred; color: white; border: 1px solid transparent;
-                                        border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px">Borrow</button>
+                                        border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px" onclick="borrow(<%=bookis.getId()%>)">Borrow</button>
                             <%
                                 if (currentUser.getAccess() == 1) {
                             %>
                             <button type="button" id="deleteButton" style="background-color: darkred; color: white; border: 1px solid transparent;
-                                        border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px">Delete</button>
+                                        border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px" onclick="deleteBook(<%=bookis.getId()%>)">Delete</button>
                         <%
                             }
                         %>
@@ -237,6 +232,10 @@
 
             </div>
         </section>
+        <form action="GetBorrowServlet">
+            <button type="submit" style="background-color: darkred; color: white; border: 1px solid transparent;
+                                        border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px" >My Profile</button>
+        </form>
     </div>
     <%
         if (currentUser.getAccess() == 1) {

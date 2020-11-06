@@ -25,12 +25,6 @@
     <form method="post" action="AddBookServlet">
         <h3 style="background-color: rgba(255, 61, 61, 0.568); height: 50px; text-align: center; padding: 5px"><b>Add New Book</b></h3>
         <div class="form-group">
-            <input type="hidden" value="add" name="action" style="background-color: rgba(14, 56, 156, 0.329); border: 0px; color: white;">
-
-
-            <label style="background-color: rgba(14, 56, 156, 0.329); border: 0px; color: white;">Count:<br> <input type="number" name="count" class="form-group"></label><br>
-        </div>
-        <div class="form-group">
             <label for="exampleInputEmail2">Name</label>
             <input type="text" name="name" class="form-control" id="exampleInputEmail2">
         </div>

@@ -81,7 +81,7 @@ public class DatabaseConnection {
     }
     public void addBook(Book book){
         try {
-            String query = "INSERT INTO books(name, author, count) VALUES(?, ?, ?)";
+            String query = "INSERT INTO books(book_name, book_author, count) VALUES(?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString (1, book.getName());
             preparedStmt.setString (2, book.getAuthor());
@@ -113,12 +113,49 @@ public class DatabaseConnection {
             preparedStmt.setString (1, e);
             ResultSet rs = preparedStmt.executeQuery();
             if (rs.next()) {
-                user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6));
+                user = new User(rs.getInt(1), rs.getString(3), rs.getString(5), rs.getString(4), rs.getString(2), rs.getInt(6));
+                System.out.println(user);
                 if (user.getPassword().equals(p)) return user;
             }
         } catch(Exception cnf) {
             System.out.println(cnf.getMessage());
         }
         return null;
+    }
+    public void Borrow(User user, int id){
+        try {
+            String query = "INSERT INTO borrower(student_id, book_id) VALUES(?, ?)";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt (1, user.getId());
+            preparedStmt.setInt (2, id);
+            preparedStmt.execute();
+        } catch(Exception cnf) {
+            System.out.println(cnf.getMessage());
+        }
+    }
+    public void DeleteBook(int id){
+        try {
+            String query = "DELETE FROM books WHERE book_id = ?";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt (1, id);
+            preparedStmt.execute();
+        } catch(Exception cnf) {
+            System.out.println(cnf.getMessage());
+        }
+    }
+    public List<Book> GetUserBooks(User user){
+        List<Book> list = new ArrayList<>();
+        try {
+            String query = "SELECT b.book_name, b.book_author, b.count FROM books b JOIN borrower br WHERE b.book_id = br.book_id AND br.student_id = ?";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setInt (1, user.getId());
+            ResultSet rs = preparedStmt.executeQuery();
+            while (rs.next()) {
+                list.add(new Book( rs.getString(1), rs.getString(2), rs.getInt(3)));
+            }
+        } catch(Exception cnf) {
+            System.out.println(cnf.getMessage());
+        }
+        return list;
     }
 }

@@ -17,14 +17,16 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DatabaseConnection db = DatabaseConnection.getInstance();
         db.getCon();
+        System.out.println(request.getParameter("email") + " " + request.getParameter("password"));
         User user = db.login(request.getParameter("email"), request.getParameter("password"));
+        System.out.println(user);
         if (user == null ) {
             request.setAttribute("Error", "Email or password is incorrect");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        response.sendRedirect("/BookServlet");
+        response.sendRedirect("BookServlet");
 
     }
 }

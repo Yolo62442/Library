@@ -38,10 +38,9 @@
                         </div>
 
 
-
                         <div class="form-group">
                             <label>Password</label>
-                            <input class="form-control" type="password" placeholder="Create your password" name="password">
+                            <input class="form-control" id="password" name="password" type="password" placeholder="Create your password" name="password">
                         </div>
 
                         <div class="form-group">
