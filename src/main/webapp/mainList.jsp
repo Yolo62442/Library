@@ -238,6 +238,16 @@
             </div>
         </section>
     </div>
+    <%
+        if (currentUser.getAccess() == 1) {
+    %>
+    <form action="addBook.jsp" >
+        <button type="submit" style="background-color: darkred; color: white; border: 1px solid transparent;
+        border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px">Add book</button>
+    </form>
+    <%
+        }
+    %>
 
 </body>
 </html>
