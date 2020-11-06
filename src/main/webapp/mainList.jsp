@@ -11,7 +11,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="table.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Baloo+Bhai+2|Gotu|Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,300,700" rel="stylesheet">
@@ -89,7 +88,6 @@
     }
 
     body {
-        background-image: url("https://ru.freepik.com/free-vector/watercolor-autumn-leaves-background_5335075.htm");
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -149,45 +147,47 @@
         opacity:0.6
     }#btn-twtr:hover{color:#fff;opacity:1}
 </style>
-<div class="list-group">
-    <%
-        List<Book> books = (ArrayList<Book>)request.getAttribute("books");
-        for (Book book: books) {
-            if (book.getCount() == 0 ) continue;
-    %>
-    <section>
 
-        <div class="tbl-header" style="margin-top: 40px">
-            <table cellpadding="0" cellspacing="0" border="0">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name Of the Book</th>
-                    <th>Author</th>
-                    <th>Number of remaining books</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="tbl-content">
-            <table cellpadding="0" cellspacing="0" border="0">
-                <tbody>
-                <?php foreach ($rows as $row):
-                  ?>
-                <tr>
-                    <td><%=book.getId()%>"> </td>
-                    <td><a href="book?isbn=<%=book.getName()%>"></a></td>
-                    <td><%=book.getCount()%></td>
-                </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
-            <%
-                }
-            %>
-        </div>
-    </section>
-</div>
+    <div class="list-group">
+
+        <section>
+
+            <div class="tbl-header" style="margin-top: 40px">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name Of the Book</th>
+                        <th>Author</th>
+                        <th>Number of remaining books</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                    <%
+                        List<Book> books = (ArrayList<Book>)request.getAttribute("books");
+                        for (Book book: books) {
+                            if (book.getCount() == 0 ) continue;
+                    %>
+                    <tr>
+                        <td><%=book.getId()%></td>
+                        <td><a href="<%=book.getName()%>"><%=book.getName()%></a></td>
+                        <td><%=book.getAuthor()%></td>
+                        <td><%=book.getCount()%></td>
+                    </tr>
+                    <%
+                    }
+                    %>
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+    </div>
+
 </body>
 </html>
 

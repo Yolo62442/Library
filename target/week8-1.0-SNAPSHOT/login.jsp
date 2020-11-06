@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Authorization Form</title>
-
+    <%@include file="bootstrap.jsp"%>
 </head>
 <body>
 <div class="container">
@@ -20,12 +20,24 @@
                     <h4 class="card-title mt-2">Log in</h4>
                 </header>
                 <article class="card-body">
-                    <form method="GET" action="LoginUser">
+                    <form method="GET" action="LoginServlet">
+
+                        <%
+                            String err = (String) request.getAttribute("Error");
+                            if (err != null) {
+                        %>
+                            <div class="form-group"><h4 style="color: red"><%=err%></h4></div>
+                        <%
+                            }
+                        %>
+
                         <div class="form-group">
                             <label>Email address</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
                             <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
+
+
 
                         <div class="form-group">
                             <label>Password</label>
