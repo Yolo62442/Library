@@ -24,6 +24,19 @@
     <title>List</title>
     <script>
         $( document ).ready(function () {
+            $('#deleteButton').click(function () {
+                $.ajax({
+                    url: 'book',
+                    type: "POST",
+                    data: {
+                        action: "delete",
+                        book: '<%=book%>'
+                    }, accepts: "application/x-www-form-urlencoded; charset=UTF-8",
+                    success: function (data) {
+                        location.reload()
+                    }
+                });
+            });
 
             $('#borrowButton').click(function () {
                 $.ajax({
@@ -204,16 +217,16 @@
                         <td><%=bookis.getAuthor()%></td>
                         <td><%=bookis.getCount()%></td>
                         <td>
-                            <form action=BorrowServlet>
-                                <button type="button" id="borrowButton" style="background-color: darkred; color: white; border: 1px solid transparent;
-    border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px">Borrow</button>
-                            </form><%
-                            if (currentUser.getAccess() == 1) {
+                            <button type="button" id="borrowButton" style="background-color: darkred; color: white; border: 1px solid transparent;
+                                        border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px">Borrow</button>
+                            <%
+                                if (currentUser.getAccess() == 1) {
+                            %>
+                            <button type="button" id="deleteButton" style="background-color: darkred; color: white; border: 1px solid transparent;
+                                        border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px">Delete</button>
+                        <%
+                            }
                         %>
-                            <form action=BorrowServlet>
-                            <button type="button" id="delete" style="background-color: darkred; color: white; border: 1px solid transparent;
-    border-radius: .25rem; padding: .7rem 1rem; line-height: 1.3rem; float: left; margin-top: 20px">Delete</button>
-                        </form><% } %>
                         </td>
                     </tr>
                     <%
